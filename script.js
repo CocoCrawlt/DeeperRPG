@@ -65,6 +65,7 @@ const button4 = document.querySelector("#button4");
 const button5 = document.querySelector("#button5");
 const text = document.querySelector("#text");
 const vis = document.querySelector('#visuals');
+const char = document.querySelector('#characters');
 const lvText = document.querySelector("#lvText");
 const xpText = document.querySelector("#xpText");
 const healthText = document.querySelector("#healthText");
@@ -313,7 +314,8 @@ const monsters = [
     drops: 'gray slime droplet',
     "drop chance": 3,
     music: 0,
-    isBoss: false
+    isBoss: false,
+    image: "images/monsters/slimeG.png"
   },
   {
     name: "fanged beast",
@@ -330,7 +332,8 @@ const monsters = [
     magic: [],
     desc: "This is a fanged beast, a large, bat-like creature. Fast, but has weak defense and no spells.",
     music: 0,
-    isBoss: false
+    isBoss: false,
+    image: "images/monsters/beast.png"
   },
   {
     name: "dragon",
@@ -347,7 +350,8 @@ const monsters = [
     magic: ["fire", "heal"],
     desc: "This is the dragon keeping people from leaving town! It's been keeping the citizens in the town for 100 years, so very few know of what's beyond it. Beware of its powerful fire breath attack.",
     music: 1,
-    isBoss: true
+    isBoss: true,
+    image: "images/monsters/dweller.png"
   },
   {
     name: "kinetic stone",
@@ -366,7 +370,8 @@ const monsters = [
     drops: 'purple potion',
     "drop chance": 10,
     music: 0,
-    isBoss: false
+    isBoss: false,
+    image: "images/monsters/stoneK.png"
   },
   {
     name: "Cave Dweller",
@@ -382,7 +387,8 @@ const monsters = [
     magic: [],
     desc: "A feral beast living in the cave. It was once a cave explorer, but it got lost and now lives isolated from the town he once called home.",
     music: 0,
-    isBoss: true
+    isBoss: true,
+    image: "images/monsters/dweller.png"
   }
 ];
 
@@ -414,70 +420,70 @@ const locations = [
     "button text": ["Go to shop", "Go to cave", "Go to Dragon Mountain", "Talk to civilian", "Check inventory"],
     "button functions": [goStore, goCave, dragonGaurd, green, itemCheck],
     text: "You are in the town square. You see a sign that says \"Shop\".",
-    background: "bg_town.png"
+    background: "images/backgrounds/town.png"
   },
   {
     name: "store",
     "button text": ["Buy potions", "Buy equipment", "Sell", "Talk", "Go to town square"],
     "button functions": [buyPotion, buyEquip, sell, talk, goTown],
     text: 'You enter the shop. The shopkeeper says: "Welcome to my shop!"',
-    background: "bg_shop.png"
+    background: "images/backgrounds/shop.png"
   },
   {
     name: "cave",
     "button text": ["Fight gray slime", "Fight fanged beast", "Fight kinetic stone", "Fight Cave Dweller", "Go to town square"],
     "button functions": [fightSlime, fightBeast, fightStone, fightDweller, goTown],
     text: "You enter the cave. You see some monsters.",
-    background: "bg_cave.png"
+    background: "images/backgrounds/cave.png"
   },
   {
     name: "fight",
     "button text": ["Attack", "Check", "Item", "Magic", "Run"],
     "button functions": [attack, enemyCheck, itemMenu, magicMenu, runAway],
     text: "You are fighting a monster.",
-    background: "bg_cave.png"
+    background: "images/backgrounds/cave.png"
   },
   {
     name: "kill monster",
     "button text": ["Go to town square", "Go to town square", "Go to town square", "Go to town square", "Go to town square"],
     "button functions": [xpGame, xpGame, xpGame, xpGame, xpGame],
     text: 'You won the battle! You gain experience points and find gold.',
-    background: "bg_cave.png"
+    background: "images/backgrounds/cave.png"
   },
   {
     name: "lose",
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart, restart, restart],
     text: "You die. &#x2620;",
-    background: "bg_cave.png"
+    background: "images/backgrounds/cave.png"
   },
   { 
     name: "win", 
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?"], 
     "button functions": [restart, restart, restart, restart, restart], 
     text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;",
-    background: "bg_cave.png"
+    background: "images/backgrounds/cave.png"
   },
   {
     name: "easter egg",
     "button text": ["3", "6", "9", "12", "Go to town square?"],
     "button functions": [pickOne, pickTwo, pickThree, pickFour, goTown],
     text: "You found the hidden xp game! Pick a number above. Ten numbers will be randomly chosen between 0 and 15. If the number you choose matches one of the random numbers, you win!",
-    background: "bg_cave.png"
+    background: "images/backgrounds/cave.png"
   },
   {
     name: "intro",
     "button text": ["Answer", "Answer", "Answer", "Answer", "Answer"],
     "button functions": [pickName, pickName, pickName, pickName, pickName],
     text: "Welcome to the world of Dragon Reppeller! In this world, there is magic, and wonders... and you can't leave your town, because there's a dragon gaurding it. You have been chosen to save the town from this dragon, but first, you must answer a few questions.\n\nFirst, what is your name?",
-    background: "bg_town.png"
+    background: "images/backgrounds/town.png"
   },
   {
     name: "dragon gaurd waiting",
     "button text": ["Yes", "No", "No", "No", "No"],
     "button functions": [fightDragon, goTown, goTown, goTown, goTown],
     text: `Woah! You actually defeated the Cave Dweller? In that case, are you ready to fight The Dragon?`,
-    background: "bg_town.png"
+    background: "images/backgrounds/town.png"
   }
 ];
 let currentLocation = locations[0];
@@ -505,7 +511,8 @@ function update(location) {
   button4.onclick = location["button functions"][3];
   button5.onclick = location["button functions"][4];
   text.innerHTML = location.text;
-  vis.style.backgroundImage = `url(${location.background})`
+  vis.style.backgroundImage = `url(${location.background})`;
+  char.style.display = "none";
 }
 
 function goTown() {
@@ -577,6 +584,8 @@ function goStore() {
   mus_shop.play();
   mus_town.pause();
   mus_town.currentTime = 0;
+  char.src = monsters[fighting].image;
+  char.style.display = "inline";
 }
 function goCave() {
   update(locations[2]);
@@ -938,6 +947,8 @@ function goFight() {
   battleMusic[monsters[fighting].music].play;
   enemyStatusTimer = 0;
   enemyStatus = 0;
+  char.src = monsters[fighting].image;
+  char.style.display = "inline";
 }
 
 function battleMenuExit(){
