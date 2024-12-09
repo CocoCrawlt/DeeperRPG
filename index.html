@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./style.css">
+    <title>RPG - Dragon Repeller</title>
+  </head>
+  <body>
+    <audio id="mus_town">
+      <source src="mus_town.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_shop">
+      <source src="mus_shop.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_cave">
+      <source src="mus_cave.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_gameOver">
+      <source src="mus_gameOver.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_battleWin">
+      <source src="mus_battleWin.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_xpGame">
+      <source src="mus_xpGame.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+
+    <audio id="mus_battleStone">
+      <source src="mus_battleStone.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_battleDragon">
+      <source src="mus_battleDragon.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="mus_battleDweller">
+      <source src="mus_battleDweller.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+
+    <audio id="sfx_attack">
+      <source src="sfx_attack.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_fire">
+      <source src="sfx_fire.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_freeze">
+      <source src="sfx_freeze.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_heal">
+      <source src="sfx_heal.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_run">
+      <source src="sfx_run.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_buy">
+      <source src="sfx_buy.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_no">
+      <source src="sfx_no.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="sfx_green">
+      <source src="sfx_green.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+
+    <div id="game">
+      <div id="top25">
+        <div id="stats">
+          <span class="stat">HP: <strong><span id="healthText">50</span>/<span id="maxHealthText">50</span></strong></span>
+          <span class="stat">MP: <strong><span id="mpText">50</span>/<span id="maxMpText">50</span></strong></span>
+          <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
+          <span class="stat">LVL: <strong><span id="lvText">1</span></strong></span>
+          <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
+          <br>
+          <span class="stat">Attack: <strong><span id="atkText">5</span></strong></span>
+          <span class="stat">Defense: <strong><span id="defText">5</span></strong></span>
+          <span class="stat">Magic Strength: <strong><span id="msText">5</span></strong></span>
+          <span class="stat">Magic Defense: <strong><span id="mdText">5</span></strong></span>
+          <span class="stat">Speed: <strong><span id="speedText">10</span></strong></span>
+        </div>
+        <div id="controls">
+          <button id="button1">Go to shop</button>
+          <button id="button2">Go to cave</button>
+          <button id="button3">Go to Dragon Mountain</button>
+          <button id="button4">Talk to civilian</button>
+          <button id="button5">Check inventory</button>
+        </div>
+        <div id="monsterStats">
+          <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
+          <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
+        </div>
+        <div id="text">
+          Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. There is a shop in the square, and a cave nearby. There's also a suspicious civilian staring at you... what could they want? <br><br>What do you want to do? Use the buttons above.<br><br><strong>(This game is currently in alpha, so anything you see is subject to change. If you experience any bugs, or have any suggestions, please make sure to let me know!)</strong>
+        </div>
+      </div>
+      
+      <div id="bottom75">
+        <div id="visuals">
+          <img id="characters" src="mon_beast.png">
+        </div>
+      </div>
+      
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

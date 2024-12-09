@@ -1,0 +1,75 @@
+body {
+  background-color: #0a0a23;
+}
+
+#text {
+  background-color: #0a0a23;
+  color: #ffffff;
+  padding: 10px;
+  height: 85px;
+}
+
+#game {
+  background-color: #ffffff;
+  color: #ffffff;
+  margin: 30px auto 0px;
+  padding: 10px;
+}
+
+#controls,
+#stats,
+#visuals{
+  border: 1px solid #0a0a23;
+  padding: 5px;
+  color: #0a0a23;
+  text-align: center;
+}
+
+#monsterStats {
+  display: none;
+  border: 1px solid #0a0a23;
+  padding: 5px;
+  color: #ffffff;
+  background-color: #c70d0d;
+}
+
+.stat {
+  padding-right: 10px;
+}
+
+#characters{
+  display: none;
+  size: 50%;
+}
+
+#visuals {
+  background-image: url(bg_town.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-bottom: 17%;
+  padding-top: 17%;
+  background-position: center;
+  background-color: #000000;
+  max-height: 67vh;
+}
+
+button {
+  cursor: pointer;
+  color: #0a0a23;
+  background-color: #feac32;
+  background-image: linear-gradient(#fecc4c, #ffac33);
+  border: 3px solid #feac32;
+  margin-bottom: 5px;
+  width: 19.8%;
+  height: 50px;
+  font-size: 15px;
+
+}
+
+#top25 {
+  height: 27vh;
+}
+
+#bottom75 {
+  height: 67vh;
+}
