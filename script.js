@@ -1318,16 +1318,53 @@ function enemyCheck(){
 }
 
 function magicMenu(){
-  button1.innerHTML = "Heal (10 MP)"
-  button2.innerHTML = "Fire Attack (20 MP)"
-  button3.innerHTML = "Ice Attack (20 MP)"
-  button4.innerHTML = "Boost (30 MP)"
-  button5.innerHTML = "Back"
-  button1.onclick = magicHeal;
-  button2.onclick = magicFire;
-  button3.onclick = magicIce;
-  button4.onclick = magicBoost;
-  button5.onclick = battleMenuExit;
+  if (level >= 10){
+    button1.innerHTML = "Heal (10 MP)"
+    button2.innerHTML = "Fire Attack (20 MP)"
+    button3.innerHTML = "Ice Attack (20 MP)"
+    button4.innerHTML = "Boost (30 MP)"
+    button5.innerHTML = "Back"
+    button1.onclick = magicHeal;
+    button2.onclick = magicFire;
+    button3.onclick = magicIce;
+    button4.onclick = magicBoost;
+    button5.onclick = battleMenuExit;
+  } else if (level >= 6){
+    button1.innerHTML = "Heal (10 MP)"
+    button2.innerHTML = "Fire Attack (20 MP)"
+    button3.innerHTML = "Ice Attack (20 MP)"
+    button4.innerHTML = "No spell here!"
+    button5.innerHTML = "Back"
+    button1.onclick = magicHeal;
+    button2.onclick = magicFire;
+    button3.onclick = magicIce;
+    button4.onclick = noItem;
+    button5.onclick = battleMenuExit;
+  } else if (level >= 4){
+    button1.innerHTML = "Heal (10 MP)"
+    button2.innerHTML = "Fire Attack (20 MP)"
+    button3.innerHTML = "No spell here!"
+    button4.innerHTML = "No spell here!"
+    button5.innerHTML = "Back"
+    button1.onclick = magicHeal;
+    button2.onclick = magicFire;
+    button3.onclick = noItem;
+    button4.onclick = noItem;
+    button5.onclick = battleMenuExit;
+  } else if (level >= 2){
+    button1.innerHTML = "Heal (10 MP)"
+    button2.innerHTML = "No spell here!"
+    button3.innerHTML = "No spell here!"
+    button4.innerHTML = "No spell here!"
+    button5.innerHTML = "Back"
+    button1.onclick = magicHeal;
+    button2.onclick = noItem;
+    button3.onclick = noItem;
+    button4.onclick = noItem;
+    button5.onclick = battleMenuExit;
+  } else {
+    
+  }
 }
 
 function magicBoost() {
@@ -1587,11 +1624,11 @@ function lvUp(){
   const mdIncrease = Math.floor(Math.random() * 6) + 1;
   maxHealth += maxHpIncrease;
   maxHpText.innerText = maxHealth;
-  health = maxHealth;
+  health += maxHpIncrease;
   healthText.innerText = health;
   maxMp += maxMpIncrease;
   maxMpText.innerText = maxMp;
-  mp = maxMp;
+  mp += maxMpIncrease;
   mpText.innerText = mp;
   atk += atkIncrease;
   def += defIncrease;
@@ -1604,6 +1641,15 @@ function lvUp(){
   spd += spdIncrease;
   spdText.innerText = spd;
   text.innerText += "\n\nYou are now level " + level + "! Your attack has increased by " + atkIncrease + ", your defense has increased by " + defIncrease + ", your magic strength has increased by " + msIncrease + ", your max HP has increased by " + maxHpIncrease + ", and your max MP has increased by " + maxMpIncrease + ".";
+  if (level == 2){
+    text.innerText += "\n\nYou learned the Healing spell! Use it to heal some HP during battle.";
+  } else if (level == 4){
+    text.innerText += "\n\nYou learned the Fire spell! Use it to burn your enemies.";
+  } else if (level == 6){
+    text.innerText += "\n\nYou learned the Ice spell! Use it to freeze your enemies.";
+  } else if (level == 10){
+    text.innerText += "\n\nYou learned the Boost spell! Use it to boost one of your stats.";
+  }
 }
 
 function lose() {

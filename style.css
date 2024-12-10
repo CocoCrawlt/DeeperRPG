@@ -6,7 +6,7 @@ body {
   background-color: #0a0a23;
   color: #ffffff;
   padding: 10px;
-  height: 85px;
+  height: 135px;
 }
 
 #game {
@@ -69,9 +69,9 @@ button {
 }
 
 #top25 {
-  height: 27vh;
+  height: 33vh;
 }
 
 #bottom75 {
-  height: 67vh;
+  height: 60vh;
 }
