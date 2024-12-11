@@ -292,6 +292,14 @@ const items = [
     boost: 10,
     boostStat: health,
     desc: "I know what you are"
+  },
+  {
+    name: 'bomb',
+    cost: 50,
+    sellCost: 20,
+    type: "bomb",
+    power: 70,
+    desc: "A standard fuse bomb. Does 50 damage and may burn the enemy."
   }
 ];
 //Enemies!!!!! 
@@ -705,7 +713,7 @@ function useItemPeace(itemNum){
       text.innerText = "You try to use the " + usedItem.name + ", but your HP is already maxxed out.";
     }
     healthText.innerText = health
-  } else if (usedItem.type == "atkBoost" || usedItem.type == "defBoost"){
+  } else if (usedItem.type == "atkBoost" || usedItem.type == "defBoost" || usedItem.type == "bomb"){
     text.innerText = "The " + usedItem.name + " may only be used in battle.";
     inventoryOther.push(usedItem.name)
   } else if (usedItem.type == "mpHeal"){
@@ -791,12 +799,12 @@ function buyEquip(){
   text.innerText = '"What equipment do you need?"'
   button1.innerText = "Metal sword (30 gold)";
   button2.innerText = "Metal chestplate (30 gold)";
-  button3.innerText = "Coming soon!";
+  button3.innerText = "Bomb (50 gold)";
   button4.innerText = "Coming soon!";
   button5.innerText = "Back";
   button1.onclick = buyWeapon;
   button2.onclick = buyArmor;
-  button3.onclick = noItem;
+  button3.onclick = buyBomb;
   button4.onclick = noItem;
   button5.onclick = goStore;
 }
@@ -880,6 +888,10 @@ function buyArmor() {
     text.innerText = '"You don\'t need another one of those."';
     sfx_no.play();
   }
+}
+
+function buyBomb() {
+  buyItem('bomb', 50)
 }
 
 //Cave encounters!
@@ -1304,6 +1316,49 @@ function useItem(itemNum){
       lvUp();
       lvUp();
       lvUp();
+    } else if (usedItem.type == "bomb"){
+      const firePower = attackFormula(usedItem.power, monsters[fighting].def);
+      text.innerText = "You used the " + usedItem.name + ".";
+      const statusChance = Math.floor(Math.random() * 100)
+      if (elements[monsters[fighting].elementIn].weakness.includes("fire")){
+        const trueAttack = firePower * 2;
+        monsterHealth -= trueAttack;
+        text.innerText += " It dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s weakness!`;
+        if (enemyStatus == 0 && statusChance <= 40){
+          const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 3);
+          enemyStatus = 1;
+          if (statusTimerMod > 0){
+            enemyStatusTimer = statusTimerMod + statusList[2].baseCounter;
+          } else {
+            enemyStatusTimer = statusList[2].baseCounter
+          }
+          console.log(enemyStatusTimer);
+          text.innerText += " The enemy is now burning!";
+        }
+      } else if (elements[monsters[fighting].elementIn].strength.includes("fire")){
+        const trueAttack = Math.floor(firePower * 0.5);
+        monsterHealth -= trueAttack;
+        text.innerText += " It only dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s immunity.`
+      } else {
+        monsterHealth -= firePower
+        text.innerText += " It dealt " + firePower + ` damage to the ${monsters[fighting].name}!`
+        console.log(enemyStatus);
+        if (enemyStatus == 0 && statusChance <= 20){
+          const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 5);
+          enemyStatus = 1;
+          if (statusTimerMod > 0){
+            enemyStatusTimer = statusTimerMod + statusList[2].baseCounter;
+          } else {
+            enemyStatusTimer = statusList[2].baseCounter
+          }
+          console.log(enemyStatusTimer);
+          text.innerText += " The enemy is now burning!";
+        }
+      }
+      monsterHealthText.innerText = monsterHealth;
+      msBoost = 0;
+      sfx_fire.play();
+      winCheck();
     } else {
       text.innerText = "You used the " + usedItem.name + ". It did absolutely nothing, likely because you shouldn't have it.\n\nTo be clear, this is a bug.";
     }
