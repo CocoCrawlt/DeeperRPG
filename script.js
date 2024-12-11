@@ -617,23 +617,23 @@ function itemCheck() {
   itemTwoIndex = 1;
   itemThreeIndex = 2;
   if (inventoryOther.length % 3 == 2 && (itemMenuPage + 1 > inventoryOther.length / 3)) {
-    button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-    button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
+    button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+    button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
     button3.innerHTML = "No item here!";
     button1.onclick = itemOnePeace;
     button2.onclick = itemTwoPeace;
     button3.onclick = noItem;
   } else if (inventoryOther.length % 3 == 1 && (itemMenuPage + 1 > inventoryOther.length / 3)){
-    button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
+    button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
     button2.innerHTML = "No item here!";
     button3.innerHTML = "No item here!";
     button1.onclick = itemOnePeace;
     button2.onclick = noItem;
     button3.onclick = noItem;
   } else {
-    button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-    button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
-    button3.innerHTML = "Use " + inventoryOther[itemThreeIndex];
+    button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+    button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
+    button3.innerHTML = `Use ${inventoryOther[itemThreeIndex]}`;
     button1.onclick = itemOnePeace;
     button2.onclick = itemTwoPeace;
     button3.onclick = itemThreePeace;
@@ -647,29 +647,29 @@ function itemCheck() {
 
 function itemCheckScroll(){
   itemMenuPage++;
-  text.innerText = "Inventory Page " + (itemMenuPage + 1);
+  text.innerText = `Inventory Page ${(itemMenuPage + 1)}`;
   if (itemMenuPage <= (inventoryOther.length - 1) / 3){
     itemOneIndex += 3;
     itemTwoIndex += 3;
     itemThreeIndex += 3;
     if (inventoryOther.length % 3 == 2 && (itemMenuPage + 1 > inventoryOther.length / 3)) {
-      button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-      button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
+      button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+      button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
       button3.innerHTML = "No item here!";
       button1.onclick = itemOnePeace;
       button2.onclick = itemTwoPeace;
       button3.onclick = noItem;
     } else if (inventoryOther.length % 3 == 1 && (itemMenuPage + 1 > inventoryOther.length / 3)){
-      button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
+      button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
       button2.innerHTML = "No item here!";
       button3.innerHTML = "No item here!";
       button1.onclick = itemOnePeace;
       button2.onclick = noItem;
       button3.onclick = noItem;
     }else {
-      button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-      button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
-      button3.innerHTML = "Use " + inventoryOther[itemThreeIndex];
+      button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+      button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
+      button3.innerHTML = `Use ${inventoryOther[itemThreeIndex]}`;
       button1.onclick = itemOnePeace;
       button2.onclick = itemTwoPeace;
       button3.onclick = itemThreePeace;
@@ -707,29 +707,29 @@ function useItemPeace(itemNum){
   goTown();
   if (usedItem.type == "heal"){
     if (health <= maxHealth - boostNumber) {
-      text.innerText = "You use the " + usedItem.name + " and recover " + boostNumber + " HP!";
+      text.innerText = `You use the ${usedItem.name} and recover ${boostNumber} HP!`;
       health += boostNumber
       sfx_heal.play();
     } else if (health < maxHealth) {
-      text.innerText = "You use the " + usedItem.name + " and your HP is maxxed out!";
+      text.innerText = `You use the ${usedItem.name} and your HP is maxxed out!`;
       health = maxHealth;
       sfx_heal.play();
     } else {
-      text.innerText = "You try to use the " + usedItem.name + ", but your HP is already maxxed out.";
+      text.innerText = `You try to use the ${usedItem.name}, but your HP is already maxxed out.`;
     }
     healthText.innerText = health
   } else if (usedItem.type == "atkBoost" || usedItem.type == "defBoost" || usedItem.type == "bomb"){
-    text.innerText = "The " + usedItem.name + " may only be used in battle.";
+    text.innerText = `The ${usedItem.name} may only be used in battle.`;
     inventoryOther.push(usedItem.name)
   } else if (usedItem.type == "mpHeal"){
     if (mp <= maxMp - boostNumber) {
-      text.innerText = "You use the " + usedItem.name + " and recover " + boostNumber + " MP!";
+      text.innerText = `You use the ${usedItem.name} and recover ${boostNumber} MP!`;
       mp += boostNumber
     } else if (mp < maxHealth) {
-      text.innerText = "You use the " + usedItem.name + " and your MP is maxxed out!";
+      text.innerText = `You use the ${usedItem.name} and your MP is maxxed out!`;
       mp = maxMp;
     } else {
-      text.innerText = "You try to use the " + usedItem.name + ", but your MP is already maxxed out.";
+      text.innerText = `You try to use the ${usedItem.name}, but your MP is already maxxed out.`;
     }
     mpText.innerText = mp
   } else if (usedItem.type == "debugPotion"){
@@ -745,7 +745,7 @@ function useItemPeace(itemNum){
     lvUp();
     storyIndex = 1;
   } else {
-    text.innerText = "You used the " + usedItem.name + ". It did absolutely nothing, likely because you shouldn't have it.\n\nTo be clear, this is a bug.";
+    text.innerText = `You used the ${usedItem.name}. It did absolutely nothing, likely because you shouldn't have it.\n\nTo be clear, this is a bug.`;
   }
 
   console.log(usedItem);
@@ -832,25 +832,21 @@ function buyPotionBlue() {
 
 function buyItem(item, price) {
   if (gold >= price) {
-    if (inventoryOther.length < inventoryCap - 1) {
+    if (inventoryOther.length < inventoryCap) {
       gold -= price;
       inventoryOther.push(item)
       goldText.innerText = gold;
-      text.innerText = '"Here\'s your ' + item +'. Have a nice day!"';
+      text.innerText = `"Here's your ${item}. Have a nice day!"`;
       sfx_buy.play();
-    } else if (inventoryOther.length < inventoryCap){
-      gold -= price;
-      inventoryOther.push(item)
-      goldText.innerText = gold;
-      text.innerText = '"Here\'s your ' + item +'. Have a nice day!"';
-      text.innerText += '\n\n"It looks like your bag is full."';
-      sfx_buy.play();
+      if (inventoryOther.length >= inventoryCap){
+        text.innerText += '\n\n"It looks like your bag is full."';
+      }
     } else {
       text.innerText = '"I don\'t think that tiny bag of yours can fit anything else."';
       sfx_no.play();
     }
   } else {
-    text.innerText = '"You can\'t afford that!"';
+    text.innerText = `"You can't afford that!"`;
     sfx_no.play();
   }
 }
@@ -862,7 +858,7 @@ function buyWeapon() {
       currentWeapon++;
       goldText.innerText = gold;
       let newWeapon = weapons[currentWeapon].name;
-      text.innerText = '"Here\'s your ' + newWeapon + '. Have a nice day!"';
+      text.innerText = `"Here's your ${newWeapon}. Have a nice day!"`;
       inventoryWeapons.push(newWeapon);
       sfx_buy.play();
     } else {
@@ -882,7 +878,7 @@ function buyArmor() {
       currentArmor++;
       goldText.innerText = gold;
       let newArmor = armor[currentArmor].name;
-      text.innerText = '"Here\'s your ' + newArmor + '. Have a nice day!"';
+      text.innerText = `Here's your ${newArmor}. Have a nice day!`;
       inventoryArmor.push(newArmor);
       sfx_buy.play();
     } else {
@@ -935,7 +931,7 @@ function dragonGaurd(){
       text.innerText = `"What are you doing? If you fight The Dragon now, you'll get yourself killed!"`;
       dragonGaurdStatus = 1;
     } else {
-      text.innerText = `"You know what? Since you seem to have a deathwish, I'll let you fight the dragon. \n\nBUT! I'll only let you do it if you defeat the Dweller in the cave near town. Nobody knows much about it, but it's very powerful. Defeat it, and I'll let you through."`;
+      text.innerText = `"You know what? Since you seem to have a deathwish, I'll let you fight the dragon.\n\nHowever, I'll only let you do it if you defeat the Dweller in the cave near town. Nobody knows much about it, but it's very powerful. Defeat it, and I'll let you through."`;
     }
   } else {
     update(locations[9]);
@@ -1008,15 +1004,7 @@ function awaitNextTurn(){
 
 function winCheck(){
   if (monsterHealth <= 0) {
-    if (fighting === 2) {
-      winGame();
-    } else if (fighting === 4){
-      defeatDweller(); 
-    } else {
-      defeatMonster();
-    }
-    mus_battleStone.pause();
-    mus_battleStone.currentTime = 0;
+    defeatMonster();
   } else {
     awaitNextTurn();
   }
@@ -1034,7 +1022,7 @@ function attack() {
     if (isMonsterHit(spd, monsters[fighting].spd)) {
       const attackValue = attackFormula(weapons[currentWeapon].power + atk + atkBoost, (monsters[fighting].def))
       monsterHealth -= attackValue;
-      text.innerText = "You attack the " + monsters[fighting].name + " with your " + weapons[currentWeapon].name + " for " + attackValue + " damage.";
+      text.innerText = `You attack the ${monsters[fighting].name} with your ${weapons[currentWeapon].name} for ${attackValue} damage.`;
     } else {
       text.innerText += "You miss your attack.";
     }
@@ -1050,9 +1038,9 @@ function monsterAttack(){
   if (isMonsterHit(monsters[fighting].spd, spd)){
     const damage = attackFormula(monsters[fighting].atk, def + defBoost + armor[currentArmor].protection);
     health -= damage;
-    text.innerText = "The " + monsters[fighting].name + "'s attack deals " + damage + " damage.";
+    text.innerText = `The ${monsters[fighting].name}'s attack deals ${damage} damage.`;
   } else {
-    text.innerText = "The " + monsters[fighting].name + " misses its attack.";
+    text.innerText = `The ${monsters[fighting].name} misses its attack.`;
   }
   defBoost = 0;
   sfx_attack.play();
@@ -1061,10 +1049,9 @@ function monsterAttack(){
 function monsterMagicFire(){
   monsterMP -= 20;
   const firePower = attackFormula(monsters[fighting].ms * 2, md);
-  text.innerText = "The " + monsters[fighting].name + " used fire magic.";
   const statusChance = Math.floor(Math.random() * 100);
   health -= firePower;
-  text.innerText += " It dealt " + firePower + ` damage!`;
+  text.innerText = `The ${monsters[fighting].name} used fire magic. It dealt ${firePower} damage!`;
   console.log(enemyStatus);
   if (enemyStatus == 0 && statusChance <= 20){
     const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 5);
@@ -1088,10 +1075,10 @@ function monsterMagicHeal(){
   const healthIncrease = Math.floor(Math.random() * 10) + (monsters[fighting].ms);
   if (monsterHealth + healthIncrease >= monsters[fighting].health){
     monsterHealth = monsters[fighting].health
-    text.innerText = "The " + monsters[fighting].name + " uses a healing spell and heals back to max HP.";
+    text.innerText = `The ${monsters[fighting].name} uses a healing spell and heals back to max HP.`;
   } else {
     monsterHealth += healthIncrease;
-    text.innerText = "The " + monsters[fighting].name + " uses a healing spell and heals back " + healthIncrease + " HP.";
+    text.innerText = `The ${monsters[fighting].name} uses a healing spell and heals back ${healthIncrease} HP.`;
   }
 }
 
@@ -1632,40 +1619,43 @@ function dropFormula(dropChance){
 }
 
 function defeatMonster() {
-  let goldIncrease = Math.floor((monsters[fighting].level + 1 - (level * 0.75)) * 2.5);
-  let xpIncrease = Math.floor(monsters[fighting].level + 1 - (level * 0.75));
-  gold += goldIncrease;
-  xp += xpIncrease;
-  goldText.innerText = gold;
-  xpText.innerText = xp;
-  update(locations[4]);
-  text.innerText = monsters[fighting].defeatMsg + ` You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
+  if (fighting == 2){
+    update(locations[6]);
+    magicCounter = 0;
+  } else if (fighting == 4){
+    let goldIncrease = Math.floor((monsters[fighting].level + 1 - (level * 0.75)) * 2.5);
+    let xpIncrease = Math.floor(monsters[fighting].level + 1 - (level * 0.75));
+    gold += goldIncrease;
+    xp += xpIncrease;
+    goldText.innerText = gold;
+    xpText.innerText = xp;
+    update(locations[4]);
+    text.innerText = `The Cave Dweller was defeated. You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
+    if (storyIndex === 0){
+      storyIndex = 1;
+    }
+  } else {
+    let goldIncrease = Math.floor((monsters[fighting].level + 1 - (level * 0.75)) * 2.5);
+    let xpIncrease = Math.floor(monsters[fighting].level + 1 - (level * 0.75));
+    gold += goldIncrease;
+    xp += xpIncrease;
+    goldText.innerText = gold;
+    xpText.innerText = xp;
+    update(locations[4]);
+    text.innerText = monsters[fighting].defeatMsg + ` You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
+  }
   if (xp >= level * 5){
     lvUp();
   }
   if (dropFormula(monsters[fighting]["drop chance"]) && inventoryOther.length < inventoryCap) {
     inventoryOther.push(monsters[fighting].drops);
-    text.innerText += "\n\nYou found a " + monsters[fighting].drops + " after the battle!";
+    text.innerText += `\n\nYou found a ${monsters[fighting].drops} after the battle!`;
   }
-  mus_battleWin.play();
-}
-
-function defeatDweller(){
-  let goldIncrease = Math.floor((monsters[fighting].level + 1 - (level * 0.75)) * 2.5);
-  let xpIncrease = Math.floor(monsters[fighting].level + 1 - (level * 0.75));
-  gold += goldIncrease;
-  xp += xpIncrease;
-  goldText.innerText = gold;
-  xpText.innerText = xp;
-  update(locations[4]);
-  text.innerText = `The Cave Dweller was defeated. You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
   magicCounter = 0;
-  if (xp >= level * 5){
-    lvUp();
-  }
-  if (storyIndex === 0){
-    storyIndex = 1;
-  }
+  mus_battleDragon.pause();
+  mus_battleDragon.currentTime = 0;
+  mus_battleStone.pause();
+  mus_battleStone.currentTime = 0;
   mus_battleDweller.pause();
   mus_battleDweller.currentTime = 0;
   mus_battleWin.play();
@@ -1701,7 +1691,7 @@ function lvUp(){
   mdText.innerText = md;
   spd += spdIncrease;
   spdText.innerText = spd;
-  text.innerText += "\n\nYou are now level " + level + "! Your attack has increased by " + atkIncrease + ", your defense has increased by " + defIncrease + ", your magic strength has increased by " + msIncrease + ", your max HP has increased by " + maxHpIncrease + ", and your max MP has increased by " + maxMpIncrease + ".";
+  text.innerText += `\n\nYou are now level ${level}! Your attack has increased by ${atkIncrease}, your defense has increased by ${defIncrease}, your magic strength has increased by ${msIncrease}, your magic defense has increased by ${mdIncrease}, your speed has increased by ${spdIncrease}, your max HP has increased by ${maxHpIncrease}, and your max MP has increased by ${maxMpIncrease}.`;
   if (level == 2){
     text.innerText += "\n\nYou learned the Healing spell! Use it to heal some HP during battle.";
   } else if (level == 4){
@@ -1724,17 +1714,6 @@ function lose() {
   mus_battleDweller.pause();
   mus_battleDweller.currentTime = 0;
   mus_gameOver.play();
-  magicCounter = 0;
-}
-
-function winGame() {
-  update(locations[6]);
-  if (xp >= Math.pow(level, 3)){
-    lvUp();
-  }
-  mus_battleDragon.pause();
-  mus_battleDragon.currentTime = 0;
-  mus_battleWin.play();
   magicCounter = 0;
 }
 
@@ -1804,12 +1783,12 @@ function pick(guess) {
   while (numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 16));
   }
-  text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+  text.innerText = `You picked ${guess}. Here are the random numbers:\n`;
   for (let i = 0; i < 10 ; i++) {
     if (i == 0){
       text.innerText += numbers[i];
     } else {
-      text.innerText += ", " + numbers[i];
+      text.innerText += `, ${numbers[i]}`;
     }
   }
   text.innerText += "."
