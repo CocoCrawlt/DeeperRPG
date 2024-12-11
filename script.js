@@ -323,7 +323,8 @@ const monsters = [
     "drop chance": 3,
     music: 0,
     isBoss: false,
-    image: "images/monsters/slimeG.png"
+    image: "images/monsters/slimeG.png",
+    defeatMsg: "The gray slime melted away."
   },
   {
     name: "fanged beast",
@@ -341,7 +342,8 @@ const monsters = [
     desc: "This is a fanged beast, a large, bat-like creature. Fast, but has weak defense and no spells.",
     music: 0,
     isBoss: false,
-    image: "images/monsters/beast.png"
+    image: "images/monsters/beast.png",
+    defeatMsg: "The fanged beast was defeated."
   },
   {
     name: "dragon",
@@ -359,7 +361,8 @@ const monsters = [
     desc: "This is the dragon keeping people from leaving town! It's been keeping the citizens in the town for 100 years, so very few know of what's beyond it. Beware of its powerful fire breath attack.",
     music: 1,
     isBoss: true,
-    image: "images/monsters/dweller.png"
+    image: "images/monsters/dweller.png",
+    defeatMsg: "You should never see this message. Screenshot this screen and send it to the developer."
   },
   {
     name: "kinetic stone",
@@ -379,7 +382,8 @@ const monsters = [
     "drop chance": 10,
     music: 0,
     isBoss: false,
-    image: "images/monsters/stoneK.png"
+    image: "images/monsters/stoneK.png",
+    defeatMsg: "The kinetic stone stopped moving."
   },
   {
     name: "Cave Dweller",
@@ -396,7 +400,8 @@ const monsters = [
     desc: "A feral beast living in the cave. It was once a cave explorer, but it got lost and now lives isolated from the town he once called home.",
     music: 0,
     isBoss: true,
-    image: "images/monsters/dweller.png"
+    image: "images/monsters/dweller.png",
+    defeatMsg: "You should never see this message. Screenshot this screen and send it to the developer."
   }
 ];
 
@@ -448,7 +453,7 @@ const locations = [
     name: "fight",
     "button text": ["Attack", "Check", "Item", "Magic", "Run"],
     "button functions": [attack, enemyCheck, itemMenu, magicMenu, runAway],
-    text: "You are fighting a monster.",
+    text: `You should never see this message. Report this bug to the developer immediately.`,
     background: "images/backgrounds/cave.png"
   },
   {
@@ -460,16 +465,16 @@ const locations = [
   },
   {
     name: "lose",
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?"],
+    "button text": ["Replay", "Replay", "Replay", "Replay", "Replay"],
     "button functions": [restart, restart, restart, restart, restart],
-    text: "You die. &#x2620;",
+    text: "You have failed you mission to free the town.\n\nBut don't lose hope! Quitters are the biggest losers, after all.",
     background: "images/backgrounds/cave.png"
   },
-  { 
+  {
     name: "win", 
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?", "REPLAY?"], 
+    "button text": ["Replay", "Replay", "Replay", "Replay", "Replay"], 
     "button functions": [restart, restart, restart, restart, restart], 
-    text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;",
+    text: "You defeated the Dragon, freeing the town. In the distance, you see strange structures you've never noticed before.\n\nTo be continued...",
     background: "images/backgrounds/cave.png"
   },
   {
@@ -949,6 +954,7 @@ function fightDragon() {
 
 function goFight() {
   update(locations[3]);
+  text.innerText = `The ${monsters[fighting].name} draws near!`;
   monsterHealth = monsters[fighting].health;
   monsterMP = monsters[fighting].mp;
   monsterStats.style.display = "block";
@@ -1633,7 +1639,7 @@ function defeatMonster() {
   goldText.innerText = gold;
   xpText.innerText = xp;
   update(locations[4]);
-  text.innerText = `You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
+  text.innerText = monsters[fighting].defeatMsg + ` You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
   if (xp >= level * 5){
     lvUp();
   }
@@ -1652,7 +1658,7 @@ function defeatDweller(){
   goldText.innerText = gold;
   xpText.innerText = xp;
   update(locations[4]);
-  text.innerText = `You won the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
+  text.innerText = `The Cave Dweller was defeated. You win the battle! You gain ${xpIncrease} experience points and find ${goldIncrease} gold.`;
   magicCounter = 0;
   if (xp >= level * 5){
     lvUp();
