@@ -119,6 +119,7 @@ for (let i = battleMusic.length ; i == 0 ; i--){
   battleMusic[i].loop = true;
 }
 
+/*
 //Questions for the currently unused intro sequence
 const introQuestions = [
   {
@@ -129,9 +130,9 @@ const introQuestions = [
   },
   {
     name: "gender",
-    "button text": ["Male (he/him)", "Female (she/her)", "Yes (they/them)", "No (it/its)", "Uhhhh..."],
+    "button text": ["Male (he/him)", "Female (she/her)", "Other (they/them)", "Other (it/its)", "Uhhhh..."],
     "button functions": [pronounHe, pronounShe, pronounThey, pronounIt, noItem],
-    text: "Wonderful! " + name + " is a beautiful name.\n\nNext, are you male or female?",
+    text: `Wonderful! ${name} is a beautiful name.\n\nNext, what is your gender?`,
   },
 ];
 
@@ -140,36 +141,37 @@ const pronounSet = [
   {
     subject: "he",
     object: "his",
-    "dep posessive": "his",
-    "indep possessive": "his",
+    depPos: "his",
+    indepPos: "his",
     reflex: "himself",
     is: "is"
   },
   {
     subject: "she",
     object: "her",
-    "dep posessive": "her",
-    "indep possessive": "hers",
+    depPos: "her",
+    indepPos: "hers",
     reflex: "herself",
     is: "is"
   },
   {
     subject: "they",
     object: "them",
-    "dep posessive": "their",
-    "indep possessive": "theirs",
+    depPos: "their",
+    indepPos: "theirs",
     reflex: "themself",
     is: "are"
   },
   {
     subject: "it",
     object: "it",
-    "dep posessive": "its",
-    "indep possessive": "its",
+    depPos: "its",
+    indepPos: "its",
     reflex: "itself",
     is: "is"
   }
 ]
+*/
 
 //Magic/enemy eliments
 const elements = [
@@ -302,8 +304,8 @@ const items = [
     desc: "A standard fuse bomb. Does 50 damage and may burn the enemy."
   }
 ];
+
 //Enemies!!!!! 
-//TO DO: Add a fourth cave enemy, preferrably one that is weak to fire
 const monsters = [
   {
     name: "gray slime",
@@ -405,6 +407,7 @@ const monsters = [
   }
 ];
 
+//Status ailments
 const statusList = [
   {
     name: "normal",
@@ -487,7 +490,7 @@ const locations = [
   {
     name: "intro",
     "button text": ["Answer", "Answer", "Answer", "Answer", "Answer"],
-    "button functions": [pickName, pickName, pickName, pickName, pickName],
+    //"button functions": [pickName, pickName, pickName, pickName, pickName],
     text: "Welcome to the world of Dragon Reppeller! In this world, there is magic, and wonders... and you can't leave your town, because there's a dragon gaurding it. You have been chosen to save the town from this dragon, but first, you must answer a few questions.\n\nFirst, what is your name?",
     background: "images/backgrounds/town.png"
   },
@@ -568,7 +571,7 @@ function green(){
   sfx_green.play();
 }
 
-//Unused intro stuff
+/*Unused intro stuff
 function nextQuestion(){
 
 }
@@ -592,12 +595,14 @@ function pronounIt(){
   pronouns = 3;
   nextQuestion();
 }
+*/
+
 function goStore() {
   update(locations[1]);
   mus_shop.play();
   mus_town.pause();
   mus_town.currentTime = 0;
-  char.src = monsters[fighting].image;
+  char.src = "images/monsters/slimeG.png";
   char.style.display = "inline";
 }
 function goCave() {
@@ -1177,23 +1182,23 @@ function itemMenu(){
   itemTwoIndex = 1;
   itemThreeIndex = 2;
   if (inventoryOther.length % 3 == 2 && (itemMenuPage + 1 > inventoryOther.length / 3 )) {
-    button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-    button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
+    button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+    button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
     button3.innerHTML = "No item here!";
     button1.onclick = itemOne;
     button2.onclick = itemTwo;
     button3.onclick = noItem;
   } else if (inventoryOther.length % 3 == 1 && (itemMenuPage + 1 > inventoryOther.length / 3 )){
-    button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
+    button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
     button2.innerHTML = "No item here!";
     button3.innerHTML = "No item here!";
     button1.onclick = itemOne;
     button2.onclick = noItem;
     button3.onclick = noItem;
   }else {
-    button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-    button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
-    button3.innerHTML = "Use " + inventoryOther[itemThreeIndex];
+    button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+    button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
+    button3.innerHTML = `Use ${inventoryOther[itemThreeIndex]}`;
     button1.onclick = itemOne;
     button2.onclick = itemTwo;
     button3.onclick = itemThree;
@@ -1212,23 +1217,23 @@ function itemMenuScroll(){
     itemTwoIndex += 3;
     itemThreeIndex += 3;
     if (inventoryOther.length % 3 == 2 && (itemMenuPage + 1 > inventoryOther.length / 3)) {
-      button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-      button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
+      button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+      button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
       button3.innerHTML = "No item here!";
       button1.onclick = itemOne;
       button2.onclick = itemTwo;
       button3.onclick = noItem;
     } else if (inventoryOther.length % 3 == 1 && (itemMenuPage + 1 > inventoryOther.length / 3 )){
-      button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
+      button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
       button2.innerHTML = "No item here!";
       button3.innerHTML = "No item here!";
       button1.onclick = itemOne;
       button2.onclick = noItem;
       button3.onclick = noItem;
     }else {
-      button1.innerHTML = "Use " + inventoryOther[itemOneIndex];
-      button2.innerHTML = "Use " + inventoryOther[itemTwoIndex];
-      button3.innerHTML = "Use " + inventoryOther[itemThreeIndex];
+      button1.innerHTML = `Use ${inventoryOther[itemOneIndex]}`;
+      button2.innerHTML = `Use ${inventoryOther[itemTwoIndex]}`;
+      button3.innerHTML = `Use ${inventoryOther[itemThreeIndex]}`;
       button1.onclick = itemOne;
       button2.onclick = itemTwo;
       button3.onclick = itemThree;
@@ -1265,32 +1270,32 @@ function useItem(itemNum){
     const boostNumber = Math.floor(Math.random() * 5) + usedItem.boost;
     if (usedItem.type == "heal"){
       if (health <= maxHealth - boostNumber) {
-        text.innerText = "You use the " + usedItem.name + " and recover " + boostNumber + " HP!";
+        text.innerText = `You use the ${usedItem.name} and recover ${boostNumber} HP!`;
         health += boostNumber
         sfx_heal.play();
       } else if (health < maxHealth) {
-        text.innerText = "You use the " + usedItem.name + " and your HP is maxxed out!";
+        text.innerText = `You use the ${usedItem.name} and your HP is maxxed out!`;
         health = maxHealth;
         sfx_heal.play();
       } else {
-        text.innerText = "You try to use the " + usedItem.name + ", but your HP is already maxxed out.";
+        text.innerText = `You try to use the ${usedItem.name}, but your HP is already maxxed out.`;
       }
       healthText.innerText = health
     } else if (usedItem.type == "atkBoost"){
-      text.innerText = "You used the " + usedItem.name + "! Your next attack will do " + boostNumber + " more damage.";
+      text.innerText = `You used the ${usedItem.name}! Your next attack will do ${boostNumber} more damage.`;
       atkBoost += boostNumber
     } else if (usedItem.type == "defBoost"){
-      text.innerText = "You used the " + usedItem.name + "! You will take " + boostNumber + " less damage next turn.";
+      text.innerText = `You used the ${usedItem.name}! You will take ${boostNumber} less damage next turn.`;
       defBoost += boostNumber
     } else if (usedItem.type == "mpHeal"){
       if (mp <= maxMp - boostNumber) {
-        text.innerText = "You use the " + usedItem.name + " and recover " + boostNumber + " MP!";
+        text.innerText = `You use the ${usedItem.name} and recover ${boostNumber} MP!`;
         mp += boostNumber
       } else if (mp < maxHealth) {
-        text.innerText = "You use the " + usedItem.name + " and your MP is maxxed out!";
+        text.innerText = `You use the ${usedItem.name} and your MP is maxxed out!`;
         mp = maxMp;
       } else {
-        text.innerText = "You try to use the " + usedItem.name + ", but your MP is already maxxed out.";
+        text.innerText = `You try to use the ${usedItem.name}, but your MP is already maxxed out.`;
       }
       mpText.innerText = mp
     } else if (usedItem.type == "debugPotion"){
@@ -1311,12 +1316,12 @@ function useItem(itemNum){
       lvUp();
     } else if (usedItem.type == "bomb"){
       const firePower = attackFormula(usedItem.power, monsters[fighting].def);
-      text.innerText = "You used the " + usedItem.name + ".";
+      text.innerText = `You used the ${usedItem.name}.`;
       const statusChance = Math.floor(Math.random() * 100)
       if (elements[monsters[fighting].elementIn].weakness.includes("fire")){
         const trueAttack = firePower * 2;
         monsterHealth -= trueAttack;
-        text.innerText += " It dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s weakness!`;
+        text.innerText += ` It dealt ${trueAttack} damage due to the ${monsters[fighting].name}'s weakness!`;
         if (enemyStatus == 0 && statusChance <= 40){
           const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 3);
           enemyStatus = 1;
@@ -1331,10 +1336,10 @@ function useItem(itemNum){
       } else if (elements[monsters[fighting].elementIn].strength.includes("fire")){
         const trueAttack = Math.floor(firePower * 0.5);
         monsterHealth -= trueAttack;
-        text.innerText += " It only dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s immunity.`
+        text.innerText += ` It only dealt ${trueAttack} damage due to the ${monsters[fighting].name}'s immunity.`
       } else {
         monsterHealth -= firePower
-        text.innerText += " It dealt " + firePower + ` damage to the ${monsters[fighting].name}!`
+        text.innerText += ` It dealt ${firePower} damage to the ${monsters[fighting].name}!`
         console.log(enemyStatus);
         if (enemyStatus == 0 && statusChance <= 20){
           const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 5);
@@ -1353,7 +1358,7 @@ function useItem(itemNum){
       sfx_fire.play();
       winCheck();
     } else {
-      text.innerText = "You used the " + usedItem.name + ". It did absolutely nothing, likely because you shouldn't have it.\n\nTo be clear, this is a bug.";
+      text.innerText = `You used the ${usedItem.name}. It did absolutely nothing, likely because you shouldn't have it.\n\nTo be clear, this is a bug.`;
     }
     console.log(usedItem);
   }
@@ -1426,21 +1431,21 @@ function magicBoost() {
     msBoost = 0;
     if (boostStat === 0){
       atkBoost += boostNumber
-      text.innerText = "You use a magic boost! Your next attack will do " + boostNumber + " more damage!";
+      text.innerText = `You use a magic boost! Your next attack will do ${boostNumber} more damage!`;
     } else if (boostStat === 1){
       defBoost += boostNumber
-      text.innerText = "You use a magic boost! You will take " + boostNumber + " less damage from the enemy's next attack!";
+      text.innerText = `You use a magic boost! You will take ${boostNumber} less damage from the enemy's next attack!`;
     } else if (boostStat === 2){
       msBoost += boostNumber
-      text.innerText = "You use a magic boost! The next spell you cast will be " + boostNumber + " points stronger!";
+      text.innerText = `You use a magic boost! The next spell you cast will be ${boostNumber} points stronger!`;
     } else if (boostStat === 3){
       speedBoost += boostNumber
-      text.innerText = "Your speed will be boosted by " + boostNumber + " next turn!";
+      text.innerText = `Your speed will be boosted by ${boostNumber} next turn!`;
     } else if (boostStat === 4){
       mdBoost += boostNumber
-      text.innerText = "You will take " + boostNumber + " less damage from the enemy's next magic attack!";
+      text.innerText = `You will take ${boostNumber} less damage from the enemy's next magic attack!`;
     } else {
-      text.innerText = "If you're seeing this message, you've found a bug in the game! Please report it to the developer as soon as possible.\n\nYour attack was increased by " + boostNumber + " for compensation."
+      text.innerText = `If you're seeing this message, you've found a bug in the game! Please report it to the developer as soon as possible.\n\nYour attack was increased by ${boostNumber} for compensation.`
       atkBoost += boostNumber
     }
   } else {
@@ -1459,7 +1464,7 @@ function magicFire() {
     if (elements[monsters[fighting].elementIn].weakness.includes("fire")){
       const trueAttack = firePower * 2;
       monsterHealth -= trueAttack;
-      text.innerText += " It dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s weakness!`;
+      text.innerText += ` It dealt ${trueAttack} damage due to the ${monsters[fighting].name}'s weakness!`;
       if (enemyStatus == 0 && statusChance <= 40){
         const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 3);
         enemyStatus = 1;
@@ -1474,10 +1479,10 @@ function magicFire() {
     } else if (elements[monsters[fighting].elementIn].strength.includes("fire")){
       const trueAttack = Math.floor(firePower * 0.5);
       monsterHealth -= trueAttack;
-      text.innerText += " It only dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s immunity.`
+      text.innerText += ` It only dealt ${trueAttack} damage due to the ${monsters[fighting].name}'s immunity.`
     } else {
       monsterHealth -= firePower
-      text.innerText += " It dealt " + firePower + ` damage to the ${monsters[fighting].name}!`
+      text.innerText += ` It dealt ${firePower} damage to the ${monsters[fighting].name}!`
       console.log(enemyStatus);
       if (enemyStatus == 0 && statusChance <= 20){
         const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 5);
@@ -1513,7 +1518,7 @@ function magicIce() {
     if (elements[monsters[fighting].elementIn].weakness.includes("ice")){
       const trueAttack = firePower * 2
       monsterHealth -= trueAttack;
-      text.innerText += " It dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s weakness!`;
+      text.innerText += ` It dealt ${trueAttack} damage due to the ${monsters[fighting].name}'s weakness!`;
       if (enemyStatus == 0 && statusChance <= 10){
         const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 3);
         enemyStatus = 2;
@@ -1528,10 +1533,10 @@ function magicIce() {
     } else if (elements[monsters[fighting].elementIn].strength.includes("ice")){
       const trueAttack = Math.floor(firePower * 0.5);
       monsterHealth -= trueAttack;
-      text.innerText += " It only dealt " + trueAttack + ` damage due to the ${monsters[fighting].name}'s immunity.`
+      text.innerText += ` It only dealt ${trueAttack} damage due to the ${monsters[fighting].name}'s immunity.`
     } else {
       monsterHealth -= firePower
-      text.innerText += " It dealt " + firePower + ` damage to the ${monsters[fighting].name}!`
+      text.innerText += ` It dealt ${firePower} damage to the ${monsters[fighting].name}!`
       console.log(enemyStatus);
       if (enemyStatus == 0 && statusChance <= 20){
         const statusTimerMod = (((ms + msBoost) - monsters[fighting].md) / 5);
@@ -1568,7 +1573,7 @@ function magicHeal() {
         mp -= 10;
         mpText.innerText = mp;
         healthText.innerText = health;
-        text.innerText = "You use a healing spell and heal back " + healthIncrease + " HP.";
+        text.innerText = `You use a healing spell and heal back ${healthIncrease} HP.`;
         sfx_heal.play();
       } else {
         health = maxHealth;
@@ -1618,6 +1623,7 @@ function dropFormula(dropChance){
   return isDrop;
 }
 
+//Battle win function
 function defeatMonster() {
   if (fighting == 2){
     update(locations[6]);
@@ -1661,6 +1667,7 @@ function defeatMonster() {
   mus_battleWin.play();
 }
 
+//level up function
 function lvUp(){
   xp = xp - level * 5;
   xpText.innerText = xp
@@ -1703,6 +1710,7 @@ function lvUp(){
   }
 }
 
+//Death function
 function lose() {
   update(locations[5]);
   battleMusic[monsters[fighting].music].pause();
@@ -1717,6 +1725,7 @@ function lose() {
   magicCounter = 0;
 }
 
+//Reset function
 function restart() {
   xp = 0;
   health = 50;
@@ -1751,6 +1760,7 @@ function restart() {
   goTown();
 }
 
+//Xp game that appears after battles randomly
 function xpGame() {
   const number = Math.random();
   console.log(number);
