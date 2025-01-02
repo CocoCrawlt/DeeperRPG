@@ -35,7 +35,7 @@ let currentArmor = 0;
 let inventoryWeapons = ["stick"];
 let inventoryArmor = ["vest"];
 let inventoryKey = [];
-let inventoryOther = ['green potion', 'green potion'];
+let inventoryOther = ['green potion', 'green potion', 'debug potion'];
 let inventoryCap = 12;
 let itemMenuPage = 0;
 let itemOneIndex = 0;
@@ -1102,7 +1102,7 @@ function monsterMagicDecider(){
     }
   } else {
     if (monsters[fighting].magic.includes("heal") && monsterHealth < monsters[fighting].health){
-      if (monsterHealth <= monsters[fighting].health / 2 && monsterMP >= 10){
+      if (monsterHealth <= monsters[fighting].health / 2 && monsterMP >= 10 && Math.random() * 10 >= 5){
         monsterMagicHeal();
       } else {
         monsterAttack();
@@ -1424,7 +1424,7 @@ function magicBoost() {
   if (playerStatus == 2){
     text.innerText = "You're frozen and can't move!";
   } else if (mp >= 30){
-    const boostNumber = Math.floor(Math.random() * 5) + ((ms + msBoost) / 5);
+    const boostNumber = Math.floor((Math.random() * 10) + ((ms + msBoost) / 5));
     const boostStat = Math.floor(Math.random() * 5);
     mp -= 30;
     mpText.innerText = mp;
