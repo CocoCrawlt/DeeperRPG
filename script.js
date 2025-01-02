@@ -171,8 +171,37 @@ const pronounSet = [
     is: "is"
   }
 ]
-*/
 
+function nextQuestion(){
+
+}
+
+function pickName(){
+  name = prompt("What is your name?");
+  nextQuestion();
+}
+
+function pronounHe(){
+  pronouns = 0;
+  nextQuestion();
+}
+
+function pronounShe(){
+  pronouns = 1;
+  nextQuestion();
+}
+
+function pronounThey(){
+  pronouns = 2;
+  nextQuestion();
+}
+
+function pronounIt(){
+  pronouns = 3;
+  nextQuestion();
+}
+  
+*/
 //Magic/enemy eliments
 const elements = [
   {
@@ -570,32 +599,6 @@ function green(){
   }
   sfx_green.play();
 }
-
-/*Unused intro stuff
-function nextQuestion(){
-
-}
-function pickName(){
-  name = prompt("What is your name?");
-  nextQuestion();
-}
-function pronounHe(){
-  pronouns = 0;
-  nextQuestion();
-}
-function pronounShe(){
-  pronouns = 1;
-  nextQuestion();
-}
-function pronounThey(){
-  pronouns = 2;
-  nextQuestion();
-}
-function pronounIt(){
-  pronouns = 3;
-  nextQuestion();
-}
-*/
 
 function goStore() {
   update(locations[1]);
@@ -1420,36 +1423,35 @@ function magicMenu(){
   }
 }
 
-function magicBoost() {
+function magicHeal() {
   if (playerStatus == 2){
     text.innerText = "You're frozen and can't move!";
-  } else if (mp >= 30){
-    const boostNumber = Math.floor((Math.random() * 10) + ((ms + msBoost) / 5));
-    const boostStat = Math.floor(Math.random() * 5);
-    mp -= 30;
-    mpText.innerText = mp;
-    msBoost = 0;
-    if (boostStat === 0){
-      atkBoost += boostNumber
-      text.innerText = `You use a magic boost! Your next attack will do ${boostNumber} more damage!`;
-    } else if (boostStat === 1){
-      defBoost += boostNumber
-      text.innerText = `You use a magic boost! You will take ${boostNumber} less damage from the enemy's next attack!`;
-    } else if (boostStat === 2){
-      msBoost += boostNumber
-      text.innerText = `You use a magic boost! The next spell you cast will be ${boostNumber} points stronger!`;
-    } else if (boostStat === 3){
-      speedBoost += boostNumber
-      text.innerText = `Your speed will be boosted by ${boostNumber} next turn!`;
-    } else if (boostStat === 4){
-      mdBoost += boostNumber
-      text.innerText = `You will take ${boostNumber} less damage from the enemy's next magic attack!`;
-    } else {
-      text.innerText = `If you're seeing this message, you've found a bug in the game! Please report it to the developer as soon as possible.\n\nYour attack was increased by ${boostNumber} for compensation.`
-      atkBoost += boostNumber
-    }
   } else {
-    text.innerText = "You try to boost one of your stats, but you don't have enough MP!";
+    if (health < maxHealth && mp >= 10) {
+      const healthIncrease = Math.floor(Math.random() * 10) + (ms + msBoost);
+      if (health + healthIncrease < maxHealth) {
+        health += healthIncrease;
+        mp -= 10;
+        mpText.innerText = mp;
+        healthText.innerText = health;
+        text.innerText = `You use a healing spell and heal back ${healthIncrease} HP.`;
+        sfx_heal.play();
+      } else {
+        health = maxHealth;
+        mp -= 10;
+        mpText.innerText = mp;
+        healthText.innerText = health;
+        text.innerText = "You use a healing spell to heal back to max HP.";
+        sfx_heal.play();
+      }
+    } else if (mp < 10) {
+      healthText.innerText = health;
+      text.innerText = "You try to heal back some HP, but you don't have enough MP!";
+    } else {
+      healthText.innerText = health;
+      text.innerText = "You try to heal back some HP, but it's already maxxed out!";
+    }
+    msBoost = 0;
   }
   winCheck();
 }
@@ -1562,35 +1564,36 @@ function magicIce() {
   winCheck();
 }
 
-function magicHeal() {
+function magicBoost() {
   if (playerStatus == 2){
     text.innerText = "You're frozen and can't move!";
-  } else {
-    if (health < maxHealth && mp >= 10) {
-      const healthIncrease = Math.floor(Math.random() * 10) + (ms + msBoost);
-      if (health + healthIncrease < maxHealth) {
-        health += healthIncrease;
-        mp -= 10;
-        mpText.innerText = mp;
-        healthText.innerText = health;
-        text.innerText = `You use a healing spell and heal back ${healthIncrease} HP.`;
-        sfx_heal.play();
-      } else {
-        health = maxHealth;
-        mp -= 10;
-        mpText.innerText = mp;
-        healthText.innerText = health;
-        text.innerText = "You use a healing spell to heal back to max HP.";
-        sfx_heal.play();
-      }
-    } else if (mp < 10) {
-      healthText.innerText = health;
-      text.innerText = "You try to heal back some HP, but you don't have enough MP!";
-    } else {
-      healthText.innerText = health;
-      text.innerText = "You try to heal back some HP, but it's already maxxed out!";
-    }
+  } else if (mp >= 30){
+    const boostNumber = Math.floor((Math.random() * 10) + ((ms + msBoost) / 5));
+    const boostStat = Math.floor(Math.random() * 5);
+    mp -= 30;
+    mpText.innerText = mp;
     msBoost = 0;
+    if (boostStat === 0){
+      atkBoost += boostNumber
+      text.innerText = `You use a magic boost! Your next attack will do ${boostNumber} more damage!`;
+    } else if (boostStat === 1){
+      defBoost += boostNumber
+      text.innerText = `You use a magic boost! You will take ${boostNumber} less damage from the enemy's next attack!`;
+    } else if (boostStat === 2){
+      msBoost += boostNumber
+      text.innerText = `You use a magic boost! The next spell you cast will be ${boostNumber} points stronger!`;
+    } else if (boostStat === 3){
+      speedBoost += boostNumber
+      text.innerText = `Your speed will be boosted by ${boostNumber} next turn!`;
+    } else if (boostStat === 4){
+      mdBoost += boostNumber
+      text.innerText = `You will take ${boostNumber} less damage from the enemy's next magic attack!`;
+    } else {
+      text.innerText = `If you're seeing this message, you've found a bug in the game! Please report it to the developer as soon as possible.\n\nYour attack was increased by ${boostNumber} for compensation.`
+      atkBoost += boostNumber
+    }
+  } else {
+    text.innerText = "You try to boost one of your stats, but you don't have enough MP!";
   }
   winCheck();
 }
